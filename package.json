@@ -1,0 +1,19 @@
+{
+  "name": "ws-demo",
+  "version": "1.0.0",
+  "description": "A Web Services Demo using Node.js and MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Minghui Liu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "gridfs-storage-engine": "^0.2.4",
+    "gridfs-stream": "^1.1.1",
+    "mongodb": "^2.2.5",
+    "multer": "^1.2.0"
+  }
+}
