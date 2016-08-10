@@ -28,6 +28,13 @@ var bucket;
 // Create a express router
 var router = express.Router();
 
+// access allow origin hack
+router.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 // return all files
 router.get('/', function(req, res) {
     db.collection(FILES_COLLECTION).find().toArray(function(err, docs) {
