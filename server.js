@@ -39,6 +39,9 @@ router.use(function(req, res, next) {
 router.get('/', function(req, res) {
     db.collection(FILES_COLLECTION).find().toArray(function(err, docs) {
         assert.equal(null, err);
+        docs.forEach(function(doc) {
+            doc.link = 'http://localhost:5000/api/v1/download/' + doc._id;
+        });
         res.status(200).json(docs);
     });
 });
@@ -49,6 +52,7 @@ router.get('/:id', function(req, res) {
         { _id: new ObjectId(req.params.id) },
         function(err, doc) {
             assert.equal(null, err);
+            doc.link = 'http://localhost:5000/api/v1/download/' + doc._id;
             res.status(200).json(doc);
         });
 });
