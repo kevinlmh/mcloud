@@ -7,7 +7,8 @@ var engine = require('gridfs-storage-engine');
 
 const FILES_COLLECTION = "fs.files";
 // Connection Url
-const MONGO_URL = 'mongodb://localhost:27017/wsdemo';
+const MONGO_URL = 'mongodb://localhost:27017/mfiles';
+const API_URL = 'http://localhost:5000/api/v1';
 
 // Create express app
 var app = express();
@@ -39,6 +40,9 @@ router.use(function(req, res, next) {
 router.get('/', function(req, res) {
     db.collection(FILES_COLLECTION).find().toArray(function(err, docs) {
         assert.equal(null, err);
+        docs.forEach(function(doc) {
+            doc.link = API_URL + '/download/' + doc._id;
+        });
         res.status(200).json(docs);
     });
 });
@@ -49,6 +53,7 @@ router.get('/:id', function(req, res) {
         { _id: new ObjectId(req.params.id) },
         function(err, doc) {
             assert.equal(null, err);
+            doc.link = API_URL + '/download/' + doc._id;
             res.status(200).json(doc);
         });
 });
